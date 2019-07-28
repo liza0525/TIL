@@ -19,13 +19,6 @@
 ```
 
 - Docstring : 어떤 함수 등을 설명하기 위해 multi-line comment를 넣은 것, 함수.클래스 선언 후 설명을 하기 위해 사용
-
-  ```
-  dusts = {'서울': 72, '대전': 82, '구미': 29, '광주': 45, '중국': 200}
-  dusts_value2 = {key:'매우 나쁨' if value > 150 else '나쁨' if value > 80 else '보통' for key, value in dusts.items()}
-  print(dusts_value2)
-  ```
-
 - 파이썬에서 한줄 코딩 시 세미콜론 이용 가능(거의 쓰진 않음)
 
 ```python
