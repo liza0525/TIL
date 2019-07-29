@@ -149,7 +149,7 @@ remainder = 5 % 2
   - 파이썬에서 and는 a가 거짓이면 a를 리턴하고, 참이면 b를 리턴한다.
   - 파이썬에서 or은 a가 참이면 a를 리턴하고, 거짓이면 b를 리턴한다.
 
-- Concatemation : 숫자가 아닌 자료형은 +로 합칠 수 있다. (str, list, tuple 등, dict는 안됨)
+- Concatenation : 숫자가 아닌 자료형은 +로 합칠 수 있다. (str, list, tuple 등, dict는 안됨)
 
 - Identity : `is` 연산자로 동일한 object인지 확인
 
@@ -459,7 +459,9 @@ even_list = [num for num in numbers if num%2 == 0]
 print(even_list)
 ```
 
-### Dictionary Chmprehension
+
+
+### Dictionary Comprehension
 
 ```python
 cubic_dict = { x: x ** 3 for x in range(1,11)}
