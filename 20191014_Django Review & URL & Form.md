@@ -1,4 +1,4 @@
-# 20191014_DB_복습 & URL & Form
+# 20191014_Django Review & URL & Form
 
 - DRY(Do not Repeat Yourself)
 
@@ -380,8 +380,9 @@ INSTALLED_APPS = [
   - Django에서는 PUT, DELETE가 없어 짜기가 좀 어렵다. Django RESTful 프레임워크로 
   - HTML 코드에서 쓸 수 있는 것이 아니다, HTML에서 지원하는 것이 아니기 때문. **Javascript에서 지원**한다.
 - next=
-  - 지금까지 온 page의 경로 사항을 저장하여 parameter의 값으로 넘겨줌
-
+  
+- 지금까지 온 page의 경로 사항을 저장하여 parameter의 값으로 넘겨줌
+  
 - html 파일 내에서
 
   {{ }} : print out하기 위함
