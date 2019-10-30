@@ -1,4 +1,4 @@
-# 20191030_Javascript
+# 20191030_Event Listener & Asynchronous
 
 ## Event Listener
 
@@ -135,6 +135,138 @@ button.addEventListener('click', e => {
 </body>
 </html>
 ```
+
+
+
+### GIPHY API 요청
+
+```html
+<!doctype html>
+<html>
+
+<head>
+  <title>Giphy Search Engine</title>
+  <link rel="stylesheet" href="./main.css"> <!-- load a CSS file -->
+</head>
+
+<body>
+  <div class="container container-padding50">
+    <input type="text" id="js-userinput" class="container-textinput" value="HPHK" />
+    <button id="js-go" class="container-button">Go!</button>
+  </div>
+  <div id="result-area" class="container container-padding50 js-container">
+
+  </div>
+
+  <!-- JS 파일은 HTML문서에 이렇게 import 한다 -->
+  <script src="./main.js"></script>
+</body>
+
+</html>
+```
+
+```css
+body {
+    width: 80%;
+    max-width: 1024px;
+    margin: 0 auto;
+    background-color: black;
+}
+
+h1 {
+    color: white;
+}
+
+.img-center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.container-padding50 {
+    padding-top: 50px;
+}
+
+.container-textinput {
+    width: 80%;
+    display: inline-block;
+    padding: 20px;
+    font-size: 16px;
+    font-family: Helvetica, sans-serif;
+}
+
+.container-button {
+    width: 10%;
+    display: inline-block;
+    padding: 20px;
+    background-color: green;
+    color: white;
+    font-size: 16px;
+    font-family: Helvetica, sans-serif;
+    border: 1px solid green;
+    border-radius: 5px;
+}
+
+.container-image {
+    width: 30%;
+    display: block;
+    float: left;
+    margin-right: 3%;
+    margin-bottom: 5%
+}
+```
+
+```js
+/* 1. <input> 태그 안의 값을 잡는다. */
+const inputArea = document.querySelector('#js-userinput')
+const button = document.querySelector('#js-go')
+const resultArea = document.querySelector('#result-area')
+button.addEventListener('click', e => {
+    searchImg(inputArea.value)
+    inputArea.value = ''
+})
+
+inputArea.addEventListener('keydown', e => {
+    if (e.keyCode === 13) {
+        searchImg(inputArea.value)
+        inputArea.value = ''
+    }
+})
+/* 2. Giphy API 를 통해 data 를 받아서 가공한다. */
+const searchImg = kw => {
+    const API_KEY = 'HTFfPKBvJRMqQdQjrybLqw3oMsDOPYEy'
+    const URL = `http://api.giphy.com/v1/gifs/search?api_key=${API_KEY}&q=${kw}`
+
+    const giphyAPICall = new XMLHttpRequest() //Javascript가 browse단에서 요청을 보내주는 함수(개발자 도구에서 XHR 탭이 존재)
+    giphyAPICall.open('GET', URL) // parameter : (HTTP Method, 요청 URL) 어디로 무엇을 보낼지
+    giphyAPICall.send()
+
+    // python과 다르게 요청을 보내면, 응답을 받아서 handling을 해야 한다.
+    giphyAPICall.addEventListener('load', e => {
+        const parsedData = JSON.parse(e.target.response).data
+        // const imgURL = parsedData.data[0].images.original.url
+        // pushToDom(imgURL)
+        pushToDom(parsedData)
+    }) // 'load' : 응답을 제대로 받으면
+
+
+    /* 3. GIF 파일들을 index.html(DOM)에 밀어 넣어서 보여준다. */
+    const pushToDom = data => {
+        resultArea.innerHTML = null;
+        data.forEach( eachData => {
+            let imgURL = eachData.images.original.url
+            // resultArea.innerHTML += `<img src="${eachData.images.original.url}">` // 이 방법은 조금 아쉬운 방법
+            const elem = document.createElement('img')
+            elem.src = imgURL
+            elem.className = 'container-image' // 클래스 이름을 줄 수 있다. // CSS 파일이 있어서 해본 것
+            resultArea.appendChild(elem)
+        })
+        // resultArea.innerHTML = `<img src="${data}">`
+    }
+}
+```
+
+
 
 
 
